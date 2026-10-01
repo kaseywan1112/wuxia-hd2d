@@ -818,7 +818,7 @@ Prototype 阶段可以暂时测试：
 
 ## **Dodge**
 
-闪避 / Dash / Roll 类动作。
+闪避 / 短距离快速虚闪（Blink）。
 
 `Shift` / Xbox `B` / PlayStation `Circle` 触发，详见第 33 节。
 
@@ -1316,6 +1316,110 @@ Run 详见第 13 节。
 
 ---
 
+## **Dodge Type / 虚闪**
+
+**Confirmed**
+
+Dodge 不使用：
+
+* 传统翻滚（Roll）  
+* 固定“小后跳”
+
+当前 Dodge 设计为：
+
+# **短距离快速虚闪 / Blink**
+
+视觉上可以类似：
+
+* 瞬步  
+* 残影  
+* 快速位移  
+* 短暂模糊
+
+Dodge 不需要让角色跳起来。
+
+角色不改变 Y 轴高度。
+
+实际上是角色在地面上的快速短距离位移。
+
+---
+
+## **Dodge Direction**
+
+**Confirmed**
+
+### **有移动方向输入时**
+
+Dodge 朝当前移动输入方向执行。
+
+* `A + Shift` → 向左 Dodge  
+* `D + Shift` → 向右 Dodge  
+* `W + Shift` → 向上 / 场景纵深方向 Dodge  
+* `S + Shift` → 向下 / 场景纵深方向 Dodge
+
+同时输入两个方向时，例如 `W + D + Shift`：
+
+可以朝对应斜方向 Dodge。
+
+具体 Vector 实现方式由开发阶段决定。
+
+### **Neutral Dodge / 没有方向输入时**
+
+没有按任何移动方向时按 `Shift`：
+
+# **朝角色当前 Facing Direction 的正后方 Dodge**
+
+* 角色面朝右 → Neutral Dodge 向左  
+* 角色面朝左 → Neutral Dodge 向右
+
+---
+
+## **Dodge 与 Facing Direction**
+
+**Confirmed**
+
+Dodge 的移动方向和角色 Facing Direction：
+
+# **是两个独立概念。**
+
+Dodge 不会因为位移方向而自动改变角色面向。
+
+例如：
+
+角色当前面朝右边的敌人
+
+↓
+
+玩家按 `A + Shift`
+
+↓
+
+角色向左 Dodge
+
+↓
+
+仍然保持面朝右
+
+这样 Dodge 结束后，玩家仍然保持原本的战斗朝向。
+
+---
+
+## **Dodge Collision**
+
+**Confirmed**
+
+Dodge：
+
+* 不能穿过墙体  
+* 不能穿过场景地形  
+* 可以穿过敌人
+
+玩家可以利用 Dodge 穿过敌人的位置，移动到敌人的另一侧。
+
+但这不代表可以穿越地图碰撞或墙壁。
+
+---
+
 ## **Dodge Values**
 
 以下内容目前：
@@ -1323,23 +1427,26 @@ Run 详见第 13 节。
 # **TBD**
 
 * Dodge Distance  
-* Dodge 无敌帧长度  
-* 没有移动输入时按 Dodge 的方向
+* Dodge Duration  
+* Dodge Speed  
+* I-frame / 无敌帧长度  
+* Perfect Dodge Window  
+* Dodge 是否能够取消某些 Skill  
+* Dodge 是否能够被其他动作取消
 
 ---
 
 ## **Dodge Visual Form**
 
-具体表现形式：
+Dodge 类型已经确认为虚闪 / Blink（见上方）。
+
+以下表现内容目前：
 
 # **TBD**
 
-可能是：
-
-* Dash  
-* Roll  
-* Quick Step  
-* 瞬间位移感动作
+* Dodge VFX 的最终形式  
+* Afterimage / 残影效果  
+* Dodge 时角色具体动画
 
 最终根据武侠美术和 Combat Feel 决定。
 
@@ -1358,6 +1465,20 @@ Dodge 使用：
 例如玩家可能拥有若干 Dodge Charge。
 
 具体数量：
+
+# **TBD**
+
+---
+
+## **Dodge Cancel 与 Dodge Charge**
+
+**暂定**
+
+当前倾向：
+
+> Dodge Cancel 和普通 Dodge 使用同一套 Dodge Charge。
+
+具体 Charge 数量、恢复速度：
 
 # **TBD**
 
@@ -1400,19 +1521,35 @@ Dodge 的恢复速度：
 
 这是战斗流畅感的重要设计。
 
-玩家在某些攻击动作中：
+## **Attack Phases / 攻击阶段**
 
-可以直接使用 Dodge：
+**Confirmed**
 
-# **Cancel 当前动作**
+一次普通攻击分为三个阶段：
 
-然后：
+**Startup / 前摇**
 
-立即进入闪避。
+↓
+
+**Active / 攻击判定阶段**
+
+↓
+
+**Recovery / 后摇**
+
+---
+
+## **Startup / 前摇**
+
+# **可以 Dodge Cancel**
+
+玩家攻击已经开始，但攻击判定还没有真正生效时：
+
+可以按 Dodge 中止这次攻击。
 
 例如：
 
-Normal Attack
+Normal Attack（Startup 中）
 
 ↓
 
@@ -1424,11 +1561,59 @@ Dodge
 
 ↓
 
-取消当前攻击后摇 / 部分动作
+中止这次攻击
 
 ↓
 
 脱离危险
+
+---
+
+## **Active / 攻击判定阶段**
+
+# **不可以 Dodge Cancel**
+
+一旦攻击进入 Active 阶段，就不能再通过 Dodge 取消。
+
+这与攻击是否真的命中敌人无关。
+
+即使攻击挥空：
+
+只要攻击判定已经开始，就视为已经出手，不能取消。
+
+---
+
+## **Recovery / 后摇**
+
+# **不可以直接 Dodge Cancel**
+
+玩家需要承担这次攻击的后摇。
+
+---
+
+## **Dodge Input Buffer**
+
+**暂定 / Prototype Direction**
+
+在 Active 或 Recovery 这类当前不能立即 Dodge 的阶段：
+
+玩家如果在阶段结束前很短的时间内提前按下 Dodge，
+
+可以使用一个非常短的：
+
+# **Dodge Input Buffer**
+
+让系统暂时记住这次输入。
+
+当前不可取消的阶段结束后：
+
+自动立即执行 Dodge。
+
+这个设计目前先作为 Prototype 测试手感。
+
+是否最终保留、具体 Buffer 时间：
+
+# **TBD**
 
 ---
 
@@ -1440,11 +1625,15 @@ Dodge
 
 而感觉控制非常僵硬。
 
-但不是所有 Animation 一定全部能 Cancel。
+同时让攻击仍然有“出手”的代价。
 
-具体 Cancel Window：
+---
 
-未来设计。
+## **Attack Cancel Summary**
+
+* Attack Startup → 可以 Dodge Cancel  
+* Attack Active → 不可以 Dodge Cancel  
+* Attack Recovery → 不可以直接 Dodge Cancel，暂定允许短 Input Buffer
 
 ---
 
@@ -2121,15 +2310,25 @@ Run 能否直接取消进 Attack / Block / Dodge TBD
 
 ## **Dodge Visual Form**
 
-Dash / Roll / Quick Step 等 TBD
+类型已确认为虚闪 / Blink。
 
-## **Dodge Distance / Invincibility Frames**
+VFX、残影、角色动画 TBD
+
+## **Dodge Distance / Duration / Speed / Invincibility Frames**
 
 TBD
 
-## **Dodge Direction Without Input**
+## **Perfect Dodge Window**
 
-没有移动输入时按 Dodge 的方向 TBD
+TBD
+
+## **Dodge Input Buffer**
+
+是否最终保留、Buffer 时间 TBD
+
+## **Dodge vs Skill / Other Cancels**
+
+Dodge 能否取消某些 Skill、能否被其他动作取消 TBD
 
 ## **Perfect Dodge Bullet Time**
 
