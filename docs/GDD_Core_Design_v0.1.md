@@ -815,7 +815,21 @@ Boss 或重要敌人触发专属战斗。
 
 # **2～3 种武器 / 战斗流派**
 
-具体武器类型暂未决定。
+除剑以外，其他具体武器类型暂未决定。
+
+---
+
+## **Demo Weapon**
+
+**Confirmed**
+
+Steam Demo 中只制作：
+
+# **剑**
+
+这一种武器 / 战斗流派。
+
+2～3 种武器 / 流派是完整版游戏的目标，其他武器在 Demo 之后加入。
 
 每一种武器应该拥有自己的：
 
@@ -1773,6 +1787,85 @@ Demo 可以先：
 
 ---
 
+## **Steam Demo Scope**
+
+**Confirmed**
+
+Demo 剧情流程详见：
+
+**Narrative Design \- Demo Story（Narrative_Design_Demo_Story）**
+
+---
+
+### **Weapon**
+
+Demo 只制作：
+
+# **剑**
+
+Prologue 的武器选择中仍然显示三把武器。
+
+但另外两把不可选择，玩家选择时会提示该武器在 Demo 中暂未开放。
+
+---
+
+### **Prologue Protagonist Art**
+
+Prologue 暂时直接使用成年主角的角色美术。
+
+暂不单独制作童年主角。
+
+童年主角的最终表现方式：
+
+# **TBD**
+
+---
+
+### **Demo Ending**
+
+Demo 结束在：
+
+> 主角南下，并开始发现南方根本不像传闻中那么安全。
+
+（对应 Narrative Design 第 38 节）
+
+结尾结构：
+
+**Boss 战**
+
+↓
+
+**一小段结尾剧情**
+
+↓
+
+**Demo 结束**
+
+Demo 中不会找到妹妹。
+
+---
+
+### **Flexible South Journey Length**
+
+南下段的长度根据战斗内容的分量调整：
+
+* 战斗内容足够 → 剧情可以提前一点收尾  
+* 战斗内容不够 → 南下剧情往后延长，同时增加战斗
+
+无论长短，Demo 都停在同一个悬念位置。
+
+---
+
+### **Demo Scope TBD**
+
+* 结尾 Boss  
+* 结尾剧情  
+* 南下途中 Mini Boss 是否与结尾 Boss 为同一场  
+* 南下段地图数量  
+* 其他 Demo 内容（地图、敌人、教学节奏等）
+
+---
+
 # **49\. Current Confirmed Combat Summary**
 
 目前 Combat Core 可以快速总结为：
@@ -1919,9 +2012,11 @@ Ultimate / Burst / Talent-dependent 等 TBD
 
 ## **Exact Weapon Types**
 
-TBD
+Demo：剑（Confirmed）
 
-只确定约 2～3 个流派。
+完整版其他武器类型：TBD
+
+完整版目标约 2～3 个流派。
 
 ## **Exact Skill Count**
 
@@ -1953,7 +2048,9 @@ A / B TBD
 
 ## **Exact Steam Demo Content**
 
-仍需继续设计。
+Demo 武器与 Demo 结尾位置已确认（见第 48 节）。
+
+具体地图、敌人、Boss、教学节奏等仍需继续设计。
 
 ---
 
