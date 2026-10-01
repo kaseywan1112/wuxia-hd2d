@@ -465,6 +465,84 @@ Boss 或重要敌人触发专属战斗。
 
 ---
 
+## **Shared Movement Logic / 共用移动逻辑**
+
+**Confirmed**
+
+Exploration 和 Combat：
+
+# **使用同一套基础移动逻辑。**
+
+Walk 和 Run 在探索与战斗中都可以使用。
+
+---
+
+## **Run / 跑步**
+
+**Confirmed**
+
+Run 用于：
+
+# **持续快速移动**
+
+Run：
+
+* 不消耗 Stamina  
+* 不消耗 Dodge Charge  
+* 没有无敌帧  
+* 探索和战斗中都可以使用
+
+Run 和 Dodge 是：
+
+# **两个完全不同的系统。**
+
+Dodge 详见第 33 节。
+
+---
+
+## **Movement Input / 移动输入**
+
+**Confirmed**
+
+### **Keyboard & Mouse**
+
+* `WASD`：普通移动 / Walk  
+* 持续按住某个方向键一小段时间后：自动进入 Run  
+* 快速双击方向键，例如 `D → D(hold)`：立即进入 Run  
+* `Shift`：Dodge
+
+### **Controller**
+
+* 左摇杆轻推：Walk  
+* 左摇杆推到较大幅度：Run  
+* Xbox：`B = Dodge`  
+* PlayStation：`Circle = Dodge`
+
+手柄不需要使用“双击方向”来触发 Run，因为左摇杆本身是模拟输入。
+
+---
+
+## **Movement Values**
+
+以下内容目前：
+
+# **TBD**
+
+* 按住方向多久后自动进入 Run  
+* Run 的具体速度  
+* 手柄进入 Run 的最终摇杆阈值  
+* Run 能否直接取消进 Attack / Block / Dodge  
+* 是否制作 Running Attack
+
+Prototype 阶段可以暂时测试：
+
+* 自动 Run 延迟约 `0.35～0.45 秒`  
+* 手柄 Run Threshold 约 `0.75`
+
+这些只是 **Prototype 测试值**，不是 Confirmed Final Value。
+
+---
+
 ## **Jump**
 
 **TBD**
@@ -724,6 +802,8 @@ Boss 或重要敌人触发专属战斗。
 
 自由移动。
 
+战斗与探索使用同一套基础移动逻辑（Walk / Run），详见第 13 节。
+
 ## **Normal Attack**
 
 普通攻击 / Combo。
@@ -739,6 +819,8 @@ Boss 或重要敌人触发专属战斗。
 ## **Dodge**
 
 闪避 / Dash / Roll 类动作。
+
+`Shift` / Xbox `B` / PlayStation `Circle` 触发，详见第 33 节。
 
 ## **Perfect Dodge**
 
@@ -1210,6 +1292,43 @@ Perfect Parry 的时间窗口：
 # **33\. Dodge System / 闪避系统**
 
 玩家拥有独立 Dodge。
+
+---
+
+## **Dodge Rules**
+
+**Confirmed**
+
+Dodge：
+
+* Keyboard：`Shift` 触发  
+* Controller：Xbox `B` / PlayStation `Circle` 触发  
+* 属于瞬间规避动作  
+* 使用 Dodge Charge  
+* 可以拥有无敌帧  
+* 可以触发 Perfect Dodge
+
+Dodge 和 Run 是：
+
+# **两个完全不同的系统。**
+
+Run 详见第 13 节。
+
+---
+
+## **Dodge Values**
+
+以下内容目前：
+
+# **TBD**
+
+* Dodge Distance  
+* Dodge 无敌帧长度  
+* 没有移动输入时按 Dodge 的方向
+
+---
+
+## **Dodge Visual Form**
 
 具体表现形式：
 
@@ -1876,6 +1995,8 @@ Demo 中不会找到妹妹。
 
 ### **One Controllable Protagonist**
 
+### **Walk / Run (Shared with Exploration)**
+
 ### **One Weapon / One Build Per Battle**
 
 ### **Normal Attack / Combo**
@@ -1927,6 +2048,8 @@ Demo 中不会找到妹妹。
 ### **Walk**
 
 ### **Run**
+
+### **Shared Movement Logic with Combat**
 
 ### **Mixed Encounter**
 
@@ -1982,9 +2105,31 @@ TBD
 
 TBD
 
+## **Run Values**
+
+自动 Run 延迟、Run 速度、手柄 Run 阈值 TBD
+
+（Prototype 测试值见第 13 节，不是最终值）
+
+## **Run Cancel**
+
+Run 能否直接取消进 Attack / Block / Dodge TBD
+
+## **Running Attack**
+
+是否制作 TBD
+
 ## **Dodge Visual Form**
 
 Dash / Roll / Quick Step 等 TBD
+
+## **Dodge Distance / Invincibility Frames**
+
+TBD
+
+## **Dodge Direction Without Input**
+
+没有移动输入时按 Dodge 的方向 TBD
 
 ## **Perfect Dodge Bullet Time**
 

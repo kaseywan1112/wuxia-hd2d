@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dy1uvap7otf6h"]
+
+[ext_resource type="Script" uid="uid://d4guwhen1fykq" path="res://scenes/player.gd" id="1_7abyo"]
+[ext_resource type="Texture2D" uid="uid://c5t7g634c37x" path="res://icon.svg" id="2_ekcfv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
+size = Vector3(20, 0, 12)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_g4v7s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+
+[node name="CombatTest" type="Node3D" unique_id=1712002496]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=81384890]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1562720573]
+mesh = SubResource("BoxMesh_g4v7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1380278399]
+shape = SubResource("WorldBoundaryShape3D_g4v7s")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1131947918]
+script = ExtResource("1_7abyo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=1879165556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1489504625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="Sprite" type="Sprite3D" parent="Player" unique_id=847443293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_ekcfv")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=582153464]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=987237759]
+transform = Transform3D(0.8660254, -0.38302222, 0.32139382, 0, 0.64278764, 0.76604444, -0.5, -0.66341394, 0.5566704, 0, 0, 0)
+shadow_enabled = true
